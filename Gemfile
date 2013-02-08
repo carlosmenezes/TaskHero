@@ -9,7 +9,14 @@ gem 'rake'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 
 # Component requirements
-gem 'haml'
+gem 'erubis', '~>2.7.0'
+gem 'barista', '~> 1.0'
+gem 'therubyracer', :require => 'v8'
+gem 'sass'
+gem 'activerecord', :require => "active_record"
+gem 'mysql'
+
+gem 'omniauth'
 
 # Test requirements
 

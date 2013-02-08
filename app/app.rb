@@ -1,9 +1,10 @@
 class TaskHero < Padrino::Application
+  register BaristaInitializer
   register Padrino::Rendering
   register Padrino::Mailer
   register Padrino::Helpers
 
-  enable :sessions
+  enable :sessions  
 
   ##
   # Caching support
@@ -44,6 +45,10 @@ class TaskHero < Padrino::Application
   #     disable :asset_stamp # no asset timestamping for dev
   #   end
   #
+
+  get '/' do
+    erb :index
+  end
 
   ##
   # You can manage errors like:
