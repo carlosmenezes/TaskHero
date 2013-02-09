@@ -1,7 +1,7 @@
---- 
-:orm: none
+---
+:orm: activerecord
 :test: none
 :mock: none
 :script: none
-:renderer: haml
-:stylesheet: none
+:renderer: erb
+:stylesheet: less

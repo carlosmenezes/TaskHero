@@ -1,4 +1,5 @@
 class TaskHero < Padrino::Application
+  register LessInitializer
   register BaristaInitializer
   register Padrino::Rendering
   register Padrino::Mailer
