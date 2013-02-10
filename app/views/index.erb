@@ -1,4 +1,4 @@
-<html>
+<html ng-app="TaskHero">
 	<head>
 		<title>Task Hero</title>
 		<%= stylesheet_link_tag 'bootstrap/stylesheets/css/bootstrap.min.css', :cache => true %>
@@ -17,6 +17,24 @@
 			</div>			
 		</div>		
 
+		<div ng-controller="TaskCtrl">
+			<button ng-click="getAllTasks()">Load!</button>
+			<h2>All Tasks</h2>
+			<ul>
+				<li ng-repeat="task in allTasks">
+					<h4>{{task.title}}</h2>
+					<p>{{task.description}}</p>
+					<p>Owner: {{task.user.name}}</p>
+					<p>Completed? {{task.completed}}</p>
+				</li>
+			</ul>
+		</div>
+
+		<%= javascript_include_tag 'angular.js' %>
+		<%= javascript_include_tag 'angular-resource.js' %>
+		<%= javascript_include_tag 'app.js' %>
+		<%= javascript_include_tag 'services/tasks.js' %>
+		<%= javascript_include_tag 'controllers/task.js' %>
 		<%= yield_content :javascripts %>
 	</body>
 </html>
