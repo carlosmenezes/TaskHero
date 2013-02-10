@@ -1,6 +1,6 @@
 class TaskHero < Padrino::Application
   register LessInitializer
-  register BaristaInitializer
+  #register BaristaInitializer
   register Padrino::Rendering
   register Padrino::Mailer
   register Padrino::Helpers
