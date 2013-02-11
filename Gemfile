@@ -27,6 +27,11 @@ gem 'omniauth'
 # Padrino Stable Gem
 gem 'padrino', '0.10.5'
 
+group :test do
+	gem 'rspec'
+	gem 'shoulda'
+end
+
 # Or Padrino Edge
 # gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 
