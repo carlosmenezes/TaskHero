@@ -6,4 +6,9 @@ TaskHero.controllers :task do
     render 'task/index'
   end
   
+  post :new do
+    @task = Task.create params[:task]
+    render :nothing => true, :status => :created
+  end
+
 end

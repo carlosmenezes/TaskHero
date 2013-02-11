@@ -9,12 +9,10 @@ gem 'rake'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 
 # Component requirements
+gem 'erubis', "~> 2.7.0"
 gem 'rack-less'
-gem 'haml'
-gem 'sqlite3'
-gem 'erubis', '~>2.7.0'
 gem 'rabl'
-gem 'barista', '~> 1.0'
+#gem 'barista', '~> 1.0'
 gem 'therubyracer', :require => 'v8'
 gem 'less'
 gem 'activerecord', :require => "active_record"
@@ -23,14 +21,16 @@ gem 'mysql'
 gem 'omniauth'
 
 # Test requirements
-
-# Padrino Stable Gem
-gem 'padrino', '0.10.5'
-
 group :test do
 	gem 'rspec'
 	gem 'shoulda'
+	gem 'rack-test', :require => "rack/test"
+	gem 'factory_girl'
+	gem 'database_cleaner'
 end
+
+# Padrino Stable Gem
+gem 'padrino', '0.10.5'
 
 # Or Padrino Edge
 # gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'

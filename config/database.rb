@@ -14,20 +14,41 @@
 #   }
 #
 ActiveRecord::Base.configurations[:development] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', "task_hero_development.db")
+  :adapter   => 'mysql',
+  :encoding  => 'utf8',
+  :reconnect => true,
+  :database  => "task_hero_development",
+  :pool      => 5,
+  :username  => 'root',
+  :password  => '',
+  :host      => '127.0.0.1',
+  :socket    => '/tmp/mysql.sock'
 
 }
 
 ActiveRecord::Base.configurations[:production] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', "task_hero_production.db")
+  :adapter   => 'mysql',
+  :encoding  => 'utf8',
+  :reconnect => true,
+  :database  => "task_hero_production",
+  :pool      => 5,
+  :username  => 'root',
+  :password  => '',
+  :host      => '127.0.0.1',
+  :socket    => '/tmp/mysql.sock'
 
 }
 
 ActiveRecord::Base.configurations[:test] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', "task_hero_test.db")
+  :adapter   => 'mysql',
+  :encoding  => 'utf8',
+  :reconnect => true,
+  :database  => "task_hero_test",
+  :pool      => 5,
+  :username  => 'root',
+  :password  => '',
+  :host      => '127.0.0.1',
+  :socket    => '/tmp/mysql.sock'
 
 }
 
