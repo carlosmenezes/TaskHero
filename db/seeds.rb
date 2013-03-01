@@ -1,6 +1,6 @@
 name = "Carlos"
 login = "task_hero"
-password = "12345"
+password = "123456"
 
 user = User.create :name => name, :login => login, :password => password
 

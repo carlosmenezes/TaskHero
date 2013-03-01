@@ -1,0 +1,33 @@
+<html ng-app="TaskHero">
+	<head>
+		<title>Task Hero</title>
+		<%= stylesheet_link_tag 'bootstrap/stylesheets/css/bootstrap.min.css', :cache => true %>
+		<%= yield_content :stylesheets %>
+	</head>
+	<body>
+
+		<div class="row-fluid">
+			<div class="span4 offset4">
+				<% form_for :user, '/login', :id => 'login_form' do |f| %>
+					<fieldset>
+						<legend>Task Hero</legend>
+						<%= f.error_messages %>
+
+						<%= f.label :login %>
+						<%= f.text_field :login %>
+						<%= f.label :password, :caption => 'Senha:' %>
+						<%= f.password_field :password %>
+
+						<p><%= f.submit "Login", :class => 'btn btn-primary' %></p>
+					</fieldset>
+				<% end %>
+			</div>
+		</div>
+
+
+		<%= javascript_include_tag 'angular.js' %>
+		<%= javascript_include_tag 'angular-resource.js' %>
+		<%= javascript_include_tag 'app.js' %>
+		<%= yield_content :javascripts %>
+	</body>
+</html>

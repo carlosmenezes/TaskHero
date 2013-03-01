@@ -1,10 +1,5 @@
 TaskHero.controllers :user do
 
-  # /user/new deve existir?
-  get :new do
-    
-  end
-
   # /user/new
   post :new do
     @user = User.create params[:user]
