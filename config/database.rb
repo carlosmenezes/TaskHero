@@ -20,7 +20,7 @@ ActiveRecord::Base.configurations[:development] = {
   :database  => "task_hero_development",
   :pool      => 5,
   :username  => 'root',
-  :password  => '',
+  :password  => 'root',
   :host      => '127.0.0.1',
   :socket    => '/tmp/mysql.sock'
 
@@ -46,7 +46,7 @@ ActiveRecord::Base.configurations[:test] = {
   :database  => "task_hero_test",
   :pool      => 5,
   :username  => 'root',
-  :password  => '',
+  :password  => 'root',
   :host      => '127.0.0.1',
   :socket    => '/tmp/mysql.sock'
 

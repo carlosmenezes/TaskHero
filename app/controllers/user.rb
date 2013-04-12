@@ -38,7 +38,7 @@ TaskHero.controllers :user do
 
   # /user/:login/tasks
   get :userTasks, :map => '/user/:login/tasks' do
-    @user = User.find_by_login(params[:login])
+    @user = User.find_by_login params[:login]
 
     if @user
       @userTasks = @user.tasks
@@ -48,7 +48,7 @@ TaskHero.controllers :user do
   
   # /user/:login/lists
   get :userLists, :map => '/user/:login/lists' do
-    @user = User.find_by_login(params[:login])
+    @user = User.find_by_login params[:login]
 
     if @user
       @userLists = @user.lists
