@@ -4,6 +4,7 @@ function UserCtrl ($scope, UsersService) {
 
 	$scope.getTasks = function () {
 		$scope.tasks = UsersService.userTasks({login: 'task_hero'});
+		console.log($scope.tasks);
 	};
 
 	$scope.getLists = function () {
@@ -12,4 +13,5 @@ function UserCtrl ($scope, UsersService) {
 
 	$scope.tasks = $scope.getTasks();
 	$scope.lists = $scope.getLists();
+	console.log($scope.tasks);
 }
