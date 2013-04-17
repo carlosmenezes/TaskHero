@@ -5,6 +5,8 @@ angular.module('TaskHero', ['TasksHeroServices']).
 		
 	}]);
 
+this.taskHeroServices = angular.module('TasksHeroServices', ['ngResource']);
+
 /*# App Module
 #
 # @abstract Description

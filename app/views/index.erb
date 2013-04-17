@@ -2,23 +2,33 @@
 	<head>
 		<title>Task Hero</title>
 		<%= stylesheet_link_tag 'bootstrap/stylesheets/css/bootstrap.min.css', :cache => true %>
+		<%= stylesheet_link_tag 'main.css'%>
 		<%= yield_content :stylesheets %>
 	</head>
 	<body>
 		<div class="container-fluid">
 			<div class="row-fluid">
-				<div class="span2">
-
+				<!-- Trocar por partial -->
+				<div id="list-region" class="span2">
+					<div id="list-header">
+						<h3 class="text-center">Task Hero</h3>
+					</div>
+					<div id="list-content" ng-controller="UserCtrl">
+						<p ng-repeat="list in lists">
+							<a href="#" ng-click="loadTasks({{list.id}})">{{list.name}}</a>
+						</p>
+					</div>
 				</div>
+				<!-- Trocar por partial -->
 				<div class="span10">
 					<h1 class="text-center">Task Hero</h1>
 					<h3 class="text-center">Under construction...</h3>
 
-					<div ng-controller="TaskCtrl">
-						<button ng-click="getAllTasks()">Load!</button>
-						<h2>All Tasks</h2>
+					<div ng-controller="UserCtrl">
+						<button ng-click="getTasks()">Load!</button>
+						<h2>Tasks from user task_hero</h2>
 						<ul>
-							<li ng-repeat="task in allTasks">
+							<li ng-repeat="task in tasks">
 								<h4>{{task.title}}</h2>
 								<p>{{task.description}}</p>
 								<p>Owner: {{task.user.name}}</p>
@@ -35,6 +45,10 @@
 		<%= javascript_include_tag 'app.js' %>
 		<%= javascript_include_tag 'services/tasks.js' %>
 		<%= javascript_include_tag 'controllers/task.js' %>
+		<%= javascript_include_tag 'services/users.js' %>
+		<%= javascript_include_tag 'controllers/user.js' %>
+		<%= javascript_include_tag 'services/lists.js' %>
+		<%= javascript_include_tag 'controllers/list.js' %>
 		<%= yield_content :javascripts %>
 	</body>
 </html>

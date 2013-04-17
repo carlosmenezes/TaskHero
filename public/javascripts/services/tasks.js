@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('TasksHeroServices', ['ngResource']).
+taskHeroServices.
 	factory('TasksService', function ($resource) {
 		return $resource('task/:taskId', {}, {
 			update: { method: 'PUT' }

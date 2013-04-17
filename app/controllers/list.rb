@@ -47,4 +47,16 @@ TaskHero.controllers :list do
       halt 404
     end
   end
+
+  # /list/:id/tasks
+  get :tasks, :map => '/list/:id/tasks' do
+    # need tests!
+    begin
+      @list = List.find params[:id]
+      @tasks = list.tasks
+      render 'list/tasks'
+    rescue ActiveRecord::RecordNotFound => e
+      halt 404
+    end
+  end
 end
