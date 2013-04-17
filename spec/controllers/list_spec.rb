@@ -127,6 +127,11 @@ describe "ListController" do
         last_response.status.should eq 404
       end
     end
-    # add more contexts to test a diferent owner deleting a list
+
+    context 'list doesn\'t belong to user' do
+      it 'should do nothing' do
+        # to test this context I must implement authentication first
+      end
+    end
   end  
 end

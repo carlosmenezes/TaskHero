@@ -33,5 +33,5 @@ def app
   ##
   # You can handle all padrino applications using instead:
   #   Padrino.application
-  TaskHero.tap { |app|  }
+  TaskHero.tap { |app| }
 end
