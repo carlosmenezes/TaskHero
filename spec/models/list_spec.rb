@@ -3,8 +3,8 @@ require 'spec_helper'
 describe List do
 
 	it 'can be created' do
-		list = FactoryGirl.build :list
-    list.user = FactoryGirl.create :user
+		list = build :list
+    list.user = create :user
 
     list.should_not be_nil
     list.should be_valid
