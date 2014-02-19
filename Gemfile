@@ -1,41 +1,49 @@
-source :rubygems
+source 'https://rubygems.org'
 
-# Server requirements (defaults to WEBrick)
-# gem 'thin'
-# gem 'mongrel'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.3'
 
-# Project requirements
-gem 'rake'
-gem 'sinatra-flash', :require => 'sinatra/flash'
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
 
-# Component requirements
-gem 'erubis', "~> 2.7.0"
-gem 'rack-less'
-#gem 'barista', '~> 1.0'
-gem 'therubyracer', :require => 'v8'
-gem 'less'
-gem 'activerecord', :require => "active_record"
-gem 'mysql'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
 
-gem 'omniauth'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
 
-# Test requirements
-group :test do
-	gem 'rspec'
-	gem 'shoulda'
-	gem 'rack-test', :require => "rack/test"
-	gem 'factory_girl'
-	gem 'database_cleaner'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
 end
 
-# Padrino Stable Gem
-gem 'padrino', '0.10.5'
-gem 'rabl'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
 
-# Or Padrino Edge
-# gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
+# Use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.1.2'
 
-# Or Individual Gems
-# %w(core gen helpers cache mailer admin).each do |g|
-#   gem 'padrino-' + g, '0.10.5'
-# end
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
+
+# Use debugger
+# gem 'debugger', group: [:development, :test]
