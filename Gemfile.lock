@@ -150,7 +150,7 @@ DEPENDENCIES
   rabl
   rack-test
   rails (= 4.0.3)
-  rspec-rails (~> 3.0.0.beta)
+  rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
   shoulda

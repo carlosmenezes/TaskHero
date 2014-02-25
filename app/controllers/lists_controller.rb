@@ -1,12 +1,12 @@
 class ListsController < ApplicationController
-  
+
   # GET /lists/:id
   def show
     begin
-      @list = List.find params[:id]  
-      render 'list/details'
+      @list = List.find params[:id]
+      render :details
     rescue ActiveRecord::RecordNotFound => e
-      halt 404
+      render status: :not_found, nothing: true
     end
   end
 
@@ -15,25 +15,24 @@ class ListsController < ApplicationController
     begin
       @list = List.find params[:id]
 
-      if @list and @list.update_attributes params[:list]
-        'OK'
+      if @list and @list.update_attributes params[:list].permit(:name)
+        render text: 'OK'
       else
-        halt 422, @list.errors.to_hash.as_json
+        render status: :unprocessable_entity, text: @list.errors.to_hash.to_json
       end
     rescue ActiveRecord::RecordNotFound => e
-      halt 404
+      render status: :not_found, nothing: true
     end
   end
 
   # POST /list/new
   def create
-    @list = List.create params[:list]
+    @list = List.create params[:list].permit(:name, :user_id, :user)
 
     if @list.valid?
-      status 201 # created
-      'OK'
-    else   
-      halt 422, @list.errors.to_hash.as_json # unprocessable_entity      
+      render text: 'OK', status: :created
+    else
+      render status: :unprocessable_entity, text: @list.errors.to_hash.to_json
     end
   end
 
@@ -42,9 +41,9 @@ class ListsController < ApplicationController
     begin
       @list = List.find params[:id]
       @list.delete
-      'OK'
+      render text: 'OK'
     rescue ActiveRecord::RecordNotFound => e
-      halt 404
+      render status: :not_found, nothing: true
     end
   end
 
@@ -56,7 +55,7 @@ class ListsController < ApplicationController
       @tasks = list.tasks
       render 'list/tasks'
     rescue ActiveRecord::RecordNotFound => e
-      halt 404
+      render status: :not_found, nothing: true
     end
   end
 end
