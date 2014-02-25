@@ -53,4 +53,7 @@ TaskHero::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :lists
+  get '/lists/:id/tasks', to: 'lists#tasks', as: 'tasks'
 end

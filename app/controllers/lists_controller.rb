@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   
-  # GET /list/:id/show
+  # GET /lists/:id
   def show
     begin
       @list = List.find params[:id]  
@@ -11,7 +11,7 @@ class ListsController < ApplicationController
   end
 
   # PUT /list/:id/edit
-  def edit
+  def update
     begin
       @list = List.find params[:id]
 
@@ -26,7 +26,7 @@ class ListsController < ApplicationController
   end
 
   # POST /list/new
-  def new
+  def create
     @list = List.create params[:list]
 
     if @list.valid?
@@ -38,7 +38,7 @@ class ListsController < ApplicationController
   end
 
   # DELETE /list/:id/delete
-  def delete
+  def destroy
     begin
       @list = List.find params[:id]
       @list.delete

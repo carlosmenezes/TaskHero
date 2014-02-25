@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "ListController" do
+describe ListsController, :type => :api do
   
-  describe 'GET #:id/show' do
+  describe 'GET show' do
     
     context 'existent list' do
       
@@ -11,7 +11,7 @@ describe "ListController" do
         list.user = FactoryGirl.create :user
         list.save
 
-        get "/list/#{list.id}/show"
+        get :show, :id => list.id
 
         last_response.status.should eq 200
         last_response.body.should match /{"name":"Task list","description":"A simple list with daily tasks..."}/
@@ -21,7 +21,7 @@ describe "ListController" do
     context 'inexistent list' do
       
       it 'should return nothing' do
-        get "/list/-11111/show"
+        get :show, id: -11111
 
         last_response.status.should eq 404
         last_response.body.should eq ''
@@ -41,7 +41,7 @@ describe "ListController" do
         list.name = 'Updated name'
 
         expect{
-          put "list/#{list.id}/edit", :list => list.attributes
+          put "lists/#{list.id}", :list => list.attributes
         }.to change(List, :count).by 0
 
         last_response.status.should eq 200
@@ -60,7 +60,7 @@ describe "ListController" do
         list.name = nil
 
         expect{
-          put "list/#{list.id}/edit", :list => list.attributes
+          put "lists/#{list.id}", :list => list.attributes
         }.to change(List, :count).by 0
         
         last_response.status.should eq 422
@@ -69,7 +69,7 @@ describe "ListController" do
     end    
   end
 
-  describe 'POST #new' do   
+  describe 'POST' do   
 
     context 'with valid attributes' do
 
@@ -78,7 +78,7 @@ describe "ListController" do
         list.user = FactoryGirl.create :user
 
         expect{
-          post '/list/new', list: list.attributes
+          post '/lists', list: list.attributes
         }.to change(List, :count).by 1
 
         last_response.status.should eq 201 # created
@@ -92,7 +92,7 @@ describe "ListController" do
         list.user = FactoryGirl.create :user
 
         expect{
-          post '/list/new', list: list.attributes
+          post '/lists', list: list.attributes
         }.to change(List, :count).by 0
 
         last_response.status.should eq 422 # unprocessable_entity        
@@ -101,7 +101,7 @@ describe "ListController" do
     end
   end
 
-  describe 'DELETE #:id/delete' do
+  describe 'DELETE #:id' do
 
     context 'list exists' do
       it 'should delete list' do
@@ -110,7 +110,7 @@ describe "ListController" do
         list.save
 
         expect{
-          delete "/list/#{list.id}/delete"
+          delete "/lists/#{list.id}"
         }.to change(List, :count).by -1
 
         last_response.status.should eq 200
@@ -121,7 +121,7 @@ describe "ListController" do
     context 'list not exists' do
       it 'should do nothing' do
         expect{
-          delete "/list/-1111/delete"
+          delete "/lists/-1111"
         }.to change(List, :count).by 0
 
         last_response.status.should eq 404
