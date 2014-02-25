@@ -1,20 +1,21 @@
 class UsersController < ApplicationController
 
   # POST /user/new
-  def new
-    @user = User.create params[:user]
-    
+  def create
+    @user = User.create params[:user].permit(:name, :login, :password)
+
     if @user.valid?
-      status 201
-      'OK'
+      render status: :created, text: 'OK'
     else
-      halt 422, @user.errors.to_hash.as_json
+      render status: :unprocessable_entity, text: @user.errors.to_hash.to_json
     end
   end
 
   # GET /user/:login/show
   def show
     @user = User.find_by_login params[:login]
+
+    puts "user ================================> #{@user}"
 
     if @user
       render 'user/details'
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
     else
       halt 404
     end
-  end  
+  end
 
   # GET /user/:login/tasks
   def user_tasks
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
       render 'user/tasks'
     end
   end
-  
+
   # GET /user/:login/lists
   def user_lists
     @user = User.find_by_login params[:login]

@@ -56,4 +56,7 @@ TaskHero::Application.routes.draw do
 
   resources :lists
   get '/lists/:id/tasks', to: 'lists#tasks', as: 'tasks'
+
+  resources :users
+  get 'users/:login', to: 'users#show', as: 'show'
 end

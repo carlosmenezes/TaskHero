@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ListsController, :type => :api do
+describe ListsController, type:  :api do
 
   describe 'GET show' do
 
