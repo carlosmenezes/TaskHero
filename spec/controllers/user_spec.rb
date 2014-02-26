@@ -47,7 +47,7 @@ describe UsersController, type: :api do
     context 'login not exists' do
       it 'should return 404 status for non existent user' do
 
-        get '/user/mmdalena/show'
+        get '/users/mmdalena'
         last_response.status.should eq 404
       end
     end
@@ -60,11 +60,11 @@ describe UsersController, type: :api do
 
         user = FactoryGirl.build(:user)
 
-        post '/user/new', :user => user.attributes
+        post '/users', :user => user.attributes
         user.name += ' da Silva'
 
         expect{
-          put '/user/mmadalena/edit', :user => user.attributes
+          put '/users/mmadalena', :user => user.attributes
         }.to change(Task, :count).by 0
 
         last_response.status.should eq 200
@@ -77,15 +77,15 @@ describe UsersController, type: :api do
 
         user = FactoryGirl.build(:user)
 
-        post '/user/new', :user => user.attributes
+        post '/users', :user => user.attributes
         user.name = nil
 
         expect{
-          put '/user/mmadalena/edit', :user => user.attributes
+          put '/users/mmadalena', :user => user.attributes
         }.to change(Task, :count).by 0
 
         last_response.status.should eq 422
-        last_response.body.should eq '["name", ["can\'t be blank"]]'
+        last_response.body.should eq '{"name":["can\'t be blank"]}'
       end
     end
 
@@ -93,7 +93,7 @@ describe UsersController, type: :api do
       it 'should return 404 status for non existent user' do
 
         expect{
-          put '/user/mmdalena/edit', :user => FactoryGirl.build(:user).attributes
+          put '/users/mmdalena', :user => FactoryGirl.build(:user).attributes
         }.to change(Task, :count).by 0
         last_response.status.should eq 404
       end
@@ -110,7 +110,7 @@ describe UsersController, type: :api do
         task.user = user
         task.save
 
-        get '/user/mmadalena/tasks'
+        get '/users/mmadalena/tasks'
 
         last_response.status.should eq 200
         last_response.body.should match /\[{\"id\":\d+,\"title\":\"Sample task\",\"description\":\"Do something cool...\",\"due_date\":null,\"completed\":false}\]/
@@ -120,9 +120,9 @@ describe UsersController, type: :api do
     context 'user hasn\'t any task'  do
       it 'should return nothing' do
 
-        get '/user/mmdalena/tasks'
+        get '/users/mmdalena/tasks'
         last_response.status.should eq 200
-        last_response.body.should eq ''
+        last_response.body.strip.should eq ''
       end
     end
   end
@@ -137,19 +137,19 @@ describe UsersController, type: :api do
         list.user = user
         list.save
 
-        get '/user/mmadalena/lists'
+        get '/users/mmadalena/lists'
 
         last_response.status.should eq 200
-        last_response.body.should match /a/
+        last_response.body.should match /[{"id":\d+,"description":"A simple list with daily tasks..."}]/
       end
     end
 
     context 'user hasn\'t any list'  do
       it 'should return nothing' do
 
-        get '/user/mmdalena/lists'
+        get '/users/mmdalena/lists'
         last_response.status.should eq 200
-        last_response.body.should eq ''
+        last_response.body.strip.should eq ''
       end
     end
   end

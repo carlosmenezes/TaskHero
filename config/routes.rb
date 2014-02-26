@@ -55,8 +55,12 @@ TaskHero::Application.routes.draw do
   #   end
 
   resources :lists
-  get '/lists/:id/tasks', to: 'lists#tasks', as: 'tasks'
+  get '/lists/:id/tasks', to: 'lists#tasks', as: 'list_tasks'
 
-  resources :users
+  resources :users, except: [:show, :update]
   get 'users/:login', to: 'users#show', as: 'show'
+  put 'users/:login', to: 'users#update', as: 'update'
+  get 'users/:login/tasks', to: 'users#tasks', as: 'users_tasks'
+  get 'users/:login/lists', to: 'users#lists', as: 'users_lists'
+
 end

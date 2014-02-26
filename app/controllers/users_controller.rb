@@ -15,46 +15,48 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_login params[:login]
 
-    puts "user ================================> #{@user}"
-
     if @user
-      render 'user/details'
+      render :details
     else
-      halt 404
+      render status: :not_found, nothing: true
     end
   end
 
   # PUT /user/:login/edit
-  def edit
+  def update
     @user = User.find_by_login params[:login]
 
-    if @user and @user.update_attributes params[:user]
-      'OK'
+    if @user and @user.update_attributes params[:user].permit(:name)
+      render text: 'OK'
     elsif @user
-      halt 422, @user.errors.to_hash.as_json
+      render status: :unprocessable_entity, text: @user.errors.to_hash.to_json
     else
-      halt 404
+      render status: :not_found, nothing: true
     end
   end
 
   # GET /user/:login/tasks
-  def user_tasks
+  def tasks
     @user = User.find_by_login params[:login]
 
     if @user
       @userTasks = @user.tasks
-      render 'user/tasks'
+      render :tasks
+      return
     end
+    render status: :ok, nothing: true
   end
 
   # GET /user/:login/lists
-  def user_lists
+  def lists
     @user = User.find_by_login params[:login]
 
     if @user
       @userLists = @user.lists
-      render 'user/lists'
+      render :lists
+      return
     end
+    render status: :ok, nothing: true
   end
 
 end
