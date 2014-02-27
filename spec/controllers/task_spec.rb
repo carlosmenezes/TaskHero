@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'TaskController' do
+describe TasksController, type: :api do
 
   describe 'GET #:id/show' do
     
@@ -11,7 +11,7 @@ describe 'TaskController' do
         task.user = FactoryGirl.create :user
         task.save
 
-        get "/task/#{task.id}/show"
+        get "tasks/#{task.id}"
 
         last_response.status.should eq 200
         last_response.body.should match /{"title":"Sample task","description":"Do something cool...","due_date":null,"alert_time":null,"completed":false}/
@@ -21,10 +21,10 @@ describe 'TaskController' do
     context 'inexistent task' do
       
       it 'should return nothing' do
-        get "/task/-11111/show"
+        get "tasks/-11111"
 
         last_response.status.should eq 404
-        last_response.body.should eq ''
+        last_response.body.strip.should eq ''
       end
     end
   end
@@ -41,7 +41,7 @@ describe 'TaskController' do
         task.title = 'Updated title'
 
         expect{
-          put "task/#{task.id}/edit", :task => task.attributes
+          put "tasks/#{task.id}", task: task.attributes
         }.to change(Task, :count).by 0
 
         last_response.status.should eq 200
@@ -60,11 +60,11 @@ describe 'TaskController' do
         task.title = nil
 
         expect{
-          put "task/#{task.id}/edit", :task => task.attributes
+          put "tasks/#{task.id}", task: task.attributes
         }.to change(Task, :count).by 0
         
         last_response.status.should eq 422
-        last_response.body.should eq '["title", ["can\'t be blank"]]'
+        last_response.body.should eq '{"title":["can\'t be blank"]}'
       end
     end    
   end
@@ -74,11 +74,11 @@ describe 'TaskController' do
     context 'with valid attributes' do
 
       it 'should create task' do
-        task = FactoryGirl.build :task
+        task = FactoryGirl.build :task, title: 'Sample task'
         task.user = FactoryGirl.create :user
 
         expect{
-          post '/task/new', task: task.attributes
+          post 'tasks', task: task.attributes
         }.to change(Task, :count).by 1
 
         last_response.status.should eq 201 # created
@@ -92,11 +92,11 @@ describe 'TaskController' do
         task.user = FactoryGirl.create :user
 
         expect{
-          post '/task/new', task: task.attributes
+          post 'tasks', task: task.attributes
         }.to change(Task, :count).by 0
 
         last_response.status.should eq 422 # unprocessable_entity        
-        last_response.body.should eq '["title", ["can\'t be blank"]]'
+        last_response.body.should eq '{"title":["can\'t be blank"]}'
       end
     end
   end
@@ -110,7 +110,7 @@ describe 'TaskController' do
         task.save
 
         expect{
-          delete "/task/#{task.id}/delete"
+          delete "/tasks/#{task.id}"
         }.to change(Task, :count).by -1
 
         last_response.status.should eq 200
@@ -121,7 +121,7 @@ describe 'TaskController' do
     context 'task not exists' do
       it 'should do nothing' do
         expect{
-          delete "/task/-1111/delete"
+          delete "/tasks/-1111"
         }.to change(Task, :count).by 0
 
         last_response.status.should eq 404

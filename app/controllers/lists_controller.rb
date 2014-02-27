@@ -27,7 +27,7 @@ class ListsController < ApplicationController
 
   # POST /list/new
   def create
-    @list = List.create params[:list].permit(:name, :user_id, :user)
+    @list = List.create params[:list].permit(:name, :user_id)
 
     if @list.valid?
       render text: 'OK', status: :created

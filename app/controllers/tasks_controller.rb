@@ -1,56 +1,55 @@
 class TasksController < ApplicationController
 
-  # GET /task/all
-  def all #, :provides => :json do
+  # GET /tasks/all
+  def all 
     @allTasks = Task.includes :user
     render 'task/index'
   end
 
-  # GET /task/:id/show
+  # GET /tasks/:id
   def show
     begin
       @task = Task.find params[:id]  
-      render 'task/details'
+      render :details
     rescue ActiveRecord::RecordNotFound => e
-      halt 404
+      render status: :not_found, nothing: true      
     end
   end
 
-  # PUT /task/:id/edit
-  def edit
+  # PUT /tasks/:id
+  def update
     begin
       @task = Task.find params[:id]
 
-      if @task and @task.update_attributes params[:task]
-        'OK'
+      if @task and @task.update_attributes params[:task].permit(:title, :description, :list_id, :user_id)
+        render text: 'OK'
       else
-        halt 422, @task.errors.to_hash.as_json
+        render status: :unprocessable_entity, text: @task.errors.to_hash.to_json
       end
     rescue ActiveRecord::RecordNotFound => e
-      halt 404
+      render status: :not_found
     end
   end
   
-  # POST /task/new
-  def new
-    @task = Task.create params[:task]
+  # POST /tasks
+  def create
+    @task = Task.create params[:task].permit(:title, :description, :list_id, :user_id)
 
     if @task.valid?
-      status 201 # created
-      'OK'
+      render status: :created, text: 'OK'
     else   
-      halt 422, @task.errors.to_hash.as_json # unprocessable_entity      
+      render status: :unprocessable_entity, text: @task.errors.to_hash.to_json
     end
   end
 
-  # DELETE /task/:id/delete
-  def delete
+  # DELETE /tasks/:id
+  def destroy
     begin
       @task = Task.find params[:id]
       @task.delete
-      'OK'
+      render text: 'OK'
     rescue ActiveRecord::RecordNotFound => e
-      halt 404
+      render status: :not_found, nothing: true
     end
   end
 end
