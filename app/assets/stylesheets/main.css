@@ -1,0 +1,8 @@
+
+#list-region {
+	-moz-box-shadow: 6px -7px 10px #888;
+	-webkit-box-shadow: 6px -7px 10px #888;
+	box-shadow: 6px -7px 10px #888;
+
+	min-height: 100%
+}

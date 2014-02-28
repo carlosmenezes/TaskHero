@@ -3,9 +3,9 @@ require 'spec_helper'
 describe TasksController, type: :api do
 
   describe 'GET #:id/show' do
-    
+
     context 'existent task' do
-      
+
       it 'should return task' do
         task = FactoryGirl.build :task
         task.user = FactoryGirl.create :user
@@ -13,18 +13,18 @@ describe TasksController, type: :api do
 
         get "tasks/#{task.id}"
 
-        last_response.status.should eq 200
-        last_response.body.should match /{"title":"Sample task","description":"Do something cool...","due_date":null,"alert_time":null,"completed":false}/
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to match /{"title":"Sample task","description":"Do something cool...","due_date":null,"alert_time":null,"completed":false}/
       end
     end
 
     context 'inexistent task' do
-      
+
       it 'should return nothing' do
         get "tasks/-11111"
 
-        last_response.status.should eq 404
-        last_response.body.strip.should eq ''
+        expect(last_response.status).to eq 404
+        expect(last_response.body.strip).to eq ''
       end
     end
   end
@@ -32,7 +32,7 @@ describe TasksController, type: :api do
   describe 'PUT #:id/edit' do
 
     context 'update with valid data' do
-      
+
       it 'should update task' do
         task = FactoryGirl.build :task
         task.user = FactoryGirl.create :user
@@ -44,13 +44,13 @@ describe TasksController, type: :api do
           put "tasks/#{task.id}", task: task.attributes
         }.to change(Task, :count).by 0
 
-        last_response.status.should eq 200
-        last_response.body.should eq 'OK'
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to eq 'OK'
       end
     end
 
     context 'update with invalid data' do
-      
+
       it 'shouldn\'t update task' do
 
         task = FactoryGirl.build :task
@@ -62,14 +62,14 @@ describe TasksController, type: :api do
         expect{
           put "tasks/#{task.id}", task: task.attributes
         }.to change(Task, :count).by 0
-        
-        last_response.status.should eq 422
-        last_response.body.should eq '{"title":["can\'t be blank"]}'
+
+        expect(last_response.status).to eq 422
+        expect(last_response.body).to eq '{"title":["can\'t be blank"]}'
       end
-    end    
+    end
   end
 
-  describe 'POST #new' do   
+  describe 'POST #new' do
 
     context 'with valid attributes' do
 
@@ -81,8 +81,8 @@ describe TasksController, type: :api do
           post 'tasks', task: task.attributes
         }.to change(Task, :count).by 1
 
-        last_response.status.should eq 201 # created
-        last_response.body.should eq "OK"
+        expect(last_response.status).to eq 201 # created
+        expect(last_response.body).to eq "OK"
       end
     end
 
@@ -95,8 +95,8 @@ describe TasksController, type: :api do
           post 'tasks', task: task.attributes
         }.to change(Task, :count).by 0
 
-        last_response.status.should eq 422 # unprocessable_entity        
-        last_response.body.should eq '{"title":["can\'t be blank"]}'
+        expect(last_response.status).to eq 422 # unprocessable_entity
+        expect(last_response.body).to eq '{"title":["can\'t be blank"]}'
       end
     end
   end
@@ -113,8 +113,8 @@ describe TasksController, type: :api do
           delete "/tasks/#{task.id}"
         }.to change(Task, :count).by -1
 
-        last_response.status.should eq 200
-        last_response.body.should eq 'OK'
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to eq 'OK'
       end
     end
 
@@ -124,7 +124,7 @@ describe TasksController, type: :api do
           delete "/tasks/-1111"
         }.to change(Task, :count).by 0
 
-        last_response.status.should eq 404
+        expect(last_response.status).to eq 404
       end
     end
     # add more contexts to test a diferent owner deleting a task

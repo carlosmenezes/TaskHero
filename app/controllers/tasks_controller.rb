@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   # GET /tasks/all
-  def all 
+  def all
     @allTasks = Task.includes :user
     render 'task/index'
   end
@@ -9,10 +9,10 @@ class TasksController < ApplicationController
   # GET /tasks/:id
   def show
     begin
-      @task = Task.find params[:id]  
+      @task = Task.find params[:id]
       render :details
     rescue ActiveRecord::RecordNotFound => e
-      render status: :not_found, nothing: true      
+      render status: :not_found, nothing: true
     end
   end
 
@@ -30,14 +30,14 @@ class TasksController < ApplicationController
       render status: :not_found
     end
   end
-  
+
   # POST /tasks
   def create
     @task = Task.create params[:task].permit(:title, :description, :list_id, :user_id)
 
     if @task.valid?
       render status: :created, text: 'OK'
-    else   
+    else
       render status: :unprocessable_entity, text: @task.errors.to_hash.to_json
     end
   end

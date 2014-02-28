@@ -12,8 +12,8 @@ describe UsersController, type: :api do
           post 'users', user: user.attributes
         }.to change(User, :count).by 1
 
-        last_response.status.should eq 201
-        last_response.body.should eq 'OK'
+        expect(last_response.status).to eq 201
+        expect(last_response.body).to eq 'OK'
       end
     end
 
@@ -25,8 +25,8 @@ describe UsersController, type: :api do
           post 'users', user: user.attributes
         }.to change(User, :count).by 0
 
-        last_response.status.should eq 422
-        last_response.body.should eq '{"login":["can\'t be blank"]}'
+        expect(last_response.status).to eq 422
+        expect(last_response.body).to eq '{"login":["can\'t be blank"]}'
       end
     end
   end
@@ -39,8 +39,8 @@ describe UsersController, type: :api do
         post 'users', user: FactoryGirl.build(:user).attributes
         get 'users/mmadalena'
 
-        last_response.status.should eq 200
-        last_response.body.should eq '{"name":"Maria Madalena"}'
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to eq '{"name":"Maria Madalena"}'
       end
     end
 
@@ -48,7 +48,7 @@ describe UsersController, type: :api do
       it 'should return 404 status for non existent user' do
 
         get '/users/mmdalena'
-        last_response.status.should eq 404
+        expect(last_response.status).to eq 404
       end
     end
   end
@@ -67,8 +67,8 @@ describe UsersController, type: :api do
           put '/users/mmadalena', :user => user.attributes
         }.to change(Task, :count).by 0
 
-        last_response.status.should eq 200
-        last_response.body.should eq 'OK'
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to eq 'OK'
       end
     end
 
@@ -84,8 +84,8 @@ describe UsersController, type: :api do
           put '/users/mmadalena', :user => user.attributes
         }.to change(Task, :count).by 0
 
-        last_response.status.should eq 422
-        last_response.body.should eq '{"name":["can\'t be blank"]}'
+        expect(last_response.status).to eq 422
+        expect(last_response.body).to eq '{"name":["can\'t be blank"]}'
       end
     end
 
@@ -95,7 +95,7 @@ describe UsersController, type: :api do
         expect{
           put '/users/mmdalena', :user => FactoryGirl.build(:user).attributes
         }.to change(Task, :count).by 0
-        last_response.status.should eq 404
+        expect(last_response.status).to eq 404
       end
     end
   end
@@ -112,8 +112,8 @@ describe UsersController, type: :api do
 
         get '/users/mmadalena/tasks'
 
-        last_response.status.should eq 200
-        last_response.body.should match /\[{\"id\":\d+,\"title\":\"Sample task\",\"description\":\"Do something cool...\",\"due_date\":null,\"completed\":false}\]/
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to match /\[{"id":\d+,"title":"Sample task","description":"Do something cool...","due_date":null,"completed":false}\]/
       end
     end
 
@@ -121,8 +121,8 @@ describe UsersController, type: :api do
       it 'should return nothing' do
 
         get '/users/mmdalena/tasks'
-        last_response.status.should eq 200
-        last_response.body.strip.should eq ''
+        expect(last_response.status).to eq 200
+        expect(last_response.body.strip).to eq ''
       end
     end
   end
@@ -139,8 +139,8 @@ describe UsersController, type: :api do
 
         get '/users/mmadalena/lists'
 
-        last_response.status.should eq 200
-        last_response.body.should match /[{"id":\d+,"description":"A simple list with daily tasks..."}]/
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to match /[{"id":\d+,"description":"A simple list with daily tasks..."}]/
       end
     end
 
@@ -148,8 +148,8 @@ describe UsersController, type: :api do
       it 'should return nothing' do
 
         get '/users/mmdalena/lists'
-        last_response.status.should eq 200
-        last_response.body.strip.should eq ''
+        expect(last_response.status).to eq 200
+        expect(last_response.body.strip).to eq ''
       end
     end
   end

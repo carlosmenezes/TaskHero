@@ -13,8 +13,8 @@ describe ListsController, type:  :api do
 
         get  "lists/#{list.id}"
 
-        last_response.status.should eq 200
-        last_response.body.should match /{"name":"Task list","description":"A simple list with daily tasks..."}/
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to match /{"name":"Task list","description":"A simple list with daily tasks..."}/
       end
     end
 
@@ -23,8 +23,8 @@ describe ListsController, type:  :api do
       it 'should return nothing' do
         get "lists/-11111"
 
-        last_response.status.should eq 404
-        last_response.body.strip.should eq ''
+        expect(last_response.status).to eq 404
+        expect(last_response.body.strip).to eq ''
       end
     end
   end
@@ -44,8 +44,8 @@ describe ListsController, type:  :api do
           put "lists/#{list.id}", :list => list.attributes
         }.to change(List, :count).by 0
 
-        last_response.status.should eq 200
-        last_response.body.should eq 'OK'
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to eq 'OK'
       end
     end
 
@@ -63,8 +63,8 @@ describe ListsController, type:  :api do
           put "lists/#{list.id}", :list => list.attributes
         }.to change(List, :count).by 0
 
-        last_response.status.should eq 422
-        last_response.body.should eq '{"name":["can\'t be blank"]}'
+        expect(last_response.status).to eq 422
+        expect(last_response.body).to eq '{"name":["can\'t be blank"]}'
       end
     end
   end
@@ -81,8 +81,8 @@ describe ListsController, type:  :api do
           post '/lists', list: list.attributes
         }.to change(List, :count).by 1
 
-        last_response.status.should eq 201 # created
-        last_response.body.should eq "OK"
+        expect(last_response.status).to eq 201 # created
+        expect(last_response.body).to eq "OK"
       end
     end
 
@@ -95,8 +95,8 @@ describe ListsController, type:  :api do
           post '/lists', list: list.attributes
         }.to change(List, :count).by 0
 
-        last_response.status.should eq 422 # unprocessable_entity
-        last_response.body.should eq '{"name":["can\'t be blank"]}'
+        expect(last_response.status).to eq 422 # unprocessable_entity
+        expect(last_response.body).to eq '{"name":["can\'t be blank"]}'
       end
     end
   end
@@ -113,8 +113,8 @@ describe ListsController, type:  :api do
           delete "/lists/#{list.id}"
         }.to change(List, :count).by -1
 
-        last_response.status.should eq 200
-        last_response.body.should eq 'OK'
+        expect(last_response.status).to eq 200
+        expect(last_response.body).to eq 'OK'
       end
     end
 
@@ -124,7 +124,7 @@ describe ListsController, type:  :api do
           delete "/lists/-1111"
         }.to change(List, :count).by 0
 
-        last_response.status.should eq 404
+        expect(last_response.status).to eq 404
       end
     end
 
