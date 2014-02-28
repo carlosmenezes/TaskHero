@@ -10,8 +10,13 @@ describe List do
     expect(list).to be_valid
   end
 
-  it { should validate_presence_of :name }
-  it { should belong_to :user }
-  it { should have_many :tasks }
+
+  it 'is invalid without a name' do
+    expect(List.new).to have(1).error_on(:name)
+  end
+
+  it 'is invalid without a user' do
+   expect(List.new).to have(1).error_on(:user_id)
+ end
 
 end
