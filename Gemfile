@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 1.2'
 gem 'rabl'
 gem 'oj'
 
+gem 'ember-rails'
+gem 'ember-source', '1.4.0'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -17,21 +17,12 @@
 						<p ng-repeat="list in lists">
 							<a href="#" ng-click="loadTasks({{list.id}})">{{list.name}}</a>
 						</p>
-					</div>					
+					</div>
 				</div>
 				<div ng-view></div>
-			</div>						
-		</div>		
+			</div>
+		</div>
 
-		<%= javascript_include_tag 'angular.js' %>
-		<%= javascript_include_tag 'angular-resource.js' %>
-		<%= javascript_include_tag 'app.js' %>
-		<%= javascript_include_tag 'services/tasks.js' %>
-		<%= javascript_include_tag 'controllers/task.js' %>
-		<%= javascript_include_tag 'services/users.js' %>
-		<%= javascript_include_tag 'controllers/user.js' %>
-		<%= javascript_include_tag 'services/lists.js' %>
-		<%= javascript_include_tag 'controllers/list.js' %>
 		<%= yield_content :javascripts %>
 	</body>
 </html>
