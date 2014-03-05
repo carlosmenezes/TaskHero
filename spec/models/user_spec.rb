@@ -2,20 +2,25 @@ require 'spec_helper'
 
 describe User do
 
-	it 'can be created' do
-		user = FactoryGirl.create :user
+  it 'can be created' do
+    user = FactoryGirl.create :user
 
-		user.should_not be_nil
-    user.should be_valid
-	end
+    expect(user).not_to be_nil
+    expect(user).to be_valid
+  end
 
-  it { should validate_presence_of :name }
-  it { should validate_presence_of :login }
-  it { should validate_uniqueness_of :login }
-  it { should validate_presence_of :password }
-  it { should ensure_length_of(:password).is_at_least 6 }
+  it { expect(User.new).to validate_presence_of :name }
 
-  it { should have_many :lists }
-  it { should have_many :tasks }
-	
+  it { expect(User.new).to validate_presence_of :login }
+
+  it { expect(User.new).to validate_uniqueness_of :login }
+
+  it { expect(User.new).to validate_presence_of :password }
+
+  it { expect(User.new).to ensure_length_of(:password).is_at_least 6 }
+
+  it { expect(User.new).to have_many :lists }
+
+  it { expect(User.new).to have_many :tasks }
+
 end

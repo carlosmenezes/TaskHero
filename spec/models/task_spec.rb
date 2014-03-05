@@ -1,27 +1,27 @@
 require "spec_helper"
 
 describe Task do
-	
-	it 'can be created' do
-		task = FactoryGirl.build :task
+
+  it 'can be created' do
+    task = FactoryGirl.build :task
     task.user = FactoryGirl.create :user
     task.list = FactoryGirl.build :list
     task.list.user = task.user
 
-    task.should_not be_nil
-    task.should be_valid
-	end
+    expect(task).not_to be_nil
+    expect(task).to be_valid
+  end
 
   it 'can be created too' do
     task = FactoryGirl.build :task
-    task.user = FactoryGirl.create :user    
+    task.user = FactoryGirl.create :user
 
-    task.should_not be_nil
-    task.should be_valid
+    expect(task).not_to be_nil
+    expect(task).to be_valid
   end
 
-  it { should validate_presence_of :title }
-  it { should belong_to :user }
-  it { should belong_to :list }
+  it { expect(Task.new).to validate_presence_of :title }
+  it { expect(Task.new).to belong_to :user }
+  it { expect(Task.new).to belong_to :list }
 
 end
