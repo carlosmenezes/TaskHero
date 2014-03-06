@@ -3,7 +3,10 @@ class TasksController < ApplicationController
   # GET /tasks/all
   def all
     @allTasks = Task.includes :user
-    render 'task/index'
+  end
+
+  def index
+
   end
 
   # GET /tasks/:id

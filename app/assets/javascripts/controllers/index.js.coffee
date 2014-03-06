@@ -1,0 +1,1 @@
+TaskHero.IndexController = Ember.ArrayController.extend()
