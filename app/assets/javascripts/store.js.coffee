@@ -1,1 +1,0 @@
-TaskHero.ApplicationAdapter = DS.FixtureAdapter.extend()
