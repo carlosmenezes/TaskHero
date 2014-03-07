@@ -4,4 +4,3 @@ TaskHero.Router.map () ->
   @resource('tasks')
   @resource('lists')
   @resource('users')
-

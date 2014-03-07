@@ -54,7 +54,7 @@ TaskHero::Application.routes.draw do
   #     resources :products
   #   end
 
-  root 'tasks#index'
+  root 'static#index'
 
   resources :lists
   get '/lists/:id/tasks', to: 'lists#tasks', as: 'list_tasks'
