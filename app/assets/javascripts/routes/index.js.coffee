@@ -1,7 +1,7 @@
 TaskHero.IndexRoute = Ember.Route.extend
-  model:  -> @store.findAll 'task'
+  model: -> @store.findAll 'task'
 
-  renderTemplate: () ->
+  renderTemplate: ->
     @render 'index'
 
     @render  'lists',
