@@ -1,2 +1,2 @@
 TaskHero.ListsRoute = Ember.Route.extend
-  model: -> @store.findAll('list')
+  model: -> @store.findAll 'list'

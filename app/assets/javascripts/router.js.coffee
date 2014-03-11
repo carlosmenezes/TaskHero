@@ -3,4 +3,5 @@
 TaskHero.Router.map ->
   @resource 'tasks'
   @resource 'lists'
-  @resource 'users'
+  @resource 'users', ->
+    @route 'usersLists', path: '/task_hero/lists'
